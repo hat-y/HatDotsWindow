@@ -1,0 +1,26 @@
+# Windows specific
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Neovim
+*.swp
+*.swo
+*~
+
+# PowerShell
+*.ps1_
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Cache directories
+.nvim-data/
+.cache/
