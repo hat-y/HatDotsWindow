@@ -14,14 +14,18 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
-		-- Extras que te sirven:
+
+		-- Useful extras:
 		{ import = "lazyvim.plugins.extras.lang.typescript" },
 		{ import = "lazyvim.plugins.extras.lang.python" },
 		{ import = "lazyvim.plugins.extras.lang.rust" },
-		-- tus plugins locales:
+		{ import = "lazyvim.plugins.extras.dap" },
+
+		-- local plugins:
 		{ import = "plugins" },
 		{ "LazyVim/LazyVim", opts = { colorscheme = "kanagawa" } },
 	},
 	defaults = { lazy = false, version = false },
 	checker = { enabled = false },
+	rocks = { enabled = false },
 })
