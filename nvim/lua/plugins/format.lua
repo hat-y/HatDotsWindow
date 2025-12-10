@@ -1,4 +1,5 @@
 return {
+	-- lua/plugins/lsp.lua
 	{
 		"stevearc/conform.nvim",
 		opts = function(_, opts)
@@ -17,7 +18,7 @@ return {
 			})
 
 			opts.formatters = vim.tbl_deep_extend("force", opts.formatters or {}, {
-				prettier = { prefer_local = "node_modules/.bin" }, -- usa el del proyecto si existe
+				prettier = { prefer_local = "node_modules/.bin" },
 				shfmt = { extra_args = { "-i", "2", "-ci" } },
 			})
 			return opts

@@ -1,4 +1,3 @@
--- lua/plugins/lsp.lua
 return {
 	{
 		"mason-org/mason-lspconfig.nvim",
@@ -43,5 +42,4 @@ return {
 			},
 		},
 	},
-}
 }
