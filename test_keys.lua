@@ -1,1 +1,0 @@
-vim.api.nvim_echo({{vim.inspect(vim.fn.maparg("<C-w>", "n"))}}, false, {})
