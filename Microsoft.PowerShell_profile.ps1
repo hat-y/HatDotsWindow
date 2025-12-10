@@ -34,7 +34,7 @@ try {
 }
 
 # ---------- Listados con iconos ----------
-# Si existe alias 'ls' (de alguna app/tema), quitalo para que gane nuestra función
+# Si existe alias 'ls', hay que quitarlo
 if (Get-Alias ls -ErrorAction SilentlyContinue) { Remove-Item Alias:ls -ErrorAction SilentlyContinue }
 
 $hasEza = Get-Command eza -ErrorAction SilentlyContinue

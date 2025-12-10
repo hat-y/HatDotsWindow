@@ -1,158 +1,128 @@
 # HatDots Windows
 
-Configuraciones de desarrollo para Windows optimizadas con Neovim, WezTerm, PowerShell y herramientas de IA.
+Configuraciones de desarrollo para Windows con Neovim, WezTerm, PowerShell y debugging integrado.
 
-## Instalación Rápida
+## Instalacion
 
 ```powershell
 # Clonar el repositorio
 git clone https://github.com/hat-y/HatDotsWindows.git $HOME\HatDotsWindows
 
-# Ejecutar script de instalación
+# Ejecutar script de instalacion
 cd $HOME\HatDotsWindows
 .\install.ps1
 ```
 
 ## Requisitos
 
-### Herramientas Importantes
+### Herramientas Esenciales
 
 ```powershell
 winget install -e --id Git.Git
 winget install -e --id Neovim.Neovim
 winget install -e --id WezTerm.WezTerm
 winget install -e --id Starship.Starship
-```
-
-### Herramientas de Desarrollo
-
-```powershell
 winget install -e --id BurntSushi.ripgrep.MSVC
 winget install -e --id sharkdp.fd
+```
+
+### Para Desarrollo
+
+```powershell
 winget install -e --id JesseDuffield.lazygit
 winget install -e --id Zig.Zig
 winget install -e --id LLVM.LLVM
+winget install -e --id eza-community.eza
 ```
 
-### Opcionales Recomendados
+## Configuracion Post-Instalacion
+
+### Neovim
+
+1. **Primer arranque**: Abre Neovim y espera instalación automática de plugins
+2. **Instalar herramientas**: `:Lazy sync`
+3. **Instalar LSP**: `:Mason` y selecciona servidores para tus lenguajes
+4. **Para debugging Python**: `python -m pip install debugpy`
+
+### API Keys (Opcional)
 
 ```powershell
-winget install -e --id eza-community.eza
-winget install -e --id ajeetdsouza.zoxide
-winget install -e --id GitHub.cli
+# Claude Code
+[System.Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "tu-key", "User")
 ```
 
-## Características
+## Caracteristicas
 
-### Neovim (LazyVim + IA)
+### Neovim
 
-- **Plugins de IA**: Claude Code, configuración para Gemini/OpenAI
-- **Lenguajes**: TypeScript, Python, Rust soporte completo
-- **Productividad**: Telescope, Oil (navegador de archivos), LazyGit
-- **UI**: Tema Kanagawa transparente, Treesitter, formateo automático
+- **LazyVim** como base con extras para TypeScript, Python, Rust
+- **Debugging integrado** con nvim-dap (soporte para Python, JavaScript/TypeScript)
+- **Claude Code** integrado con `<leader>c`
+- **Telescope optimizado** con fd y ripgrep
+- **Oil** como navegador de archivos
 
 ### WezTerm
 
-- Multiplexor de terminal moderno
-- Workspaces virtuales
-- Integración con layouts personalizados
-- Tema coordinado con Neovim
+- Multiplexor con workspaces virtuales
+- Launch menu con PowerShell y opciones de admin
+- Integración con PowerShell
 
-### PowerShell + Starship
-
-- Perfil PowerShell optimizado
-- Prompt Starship con información útil
-- Aliases y funciones de productividad
-- Integración con herramientas modernas
-
-## Configuración Post-Instalación
+## Atajos
 
 ### Neovim
 
-1. **Primer arranque**: Abre Neovim y espera que Lazy instale los plugins
-2. **LSP/Mason**: Ejecuta `:Mason` para instalar servidores LSP
-3. **Formateadores**: `:MasonInstall prettierd stylua ruff`
-4. **Treesitter**: `:TSUpdate` para actualizar parsers
-
-### API Keys (Plugins de IA)
-
-Configura las variables de entorno en PowerShell:
-
-```powershell
-# Gemini (opcional)
-[System.Environment]::SetEnvironmentVariable("GEMINI_API_KEY", "tu-key-gemini", "User")
-
-# Claude (opcional)
-[System.Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "tu-key-claude", "User")
-
-# OpenAI (opcional)
-[System.Environment]::SetEnvironmentVariable("OPENAI_API_KEY", "tu-key-openai", "User")
-```
-
-### Fonts
-
-Installa una Nerd Font para soporte de iconos:
-
-```powershell
-winget install -e --id NerdFonts.FiraCode
-```
-
-## Atajos Principales
-
-### Neovim
+**Búsqueda y navegación:**
 
 - `<leader>ff` - Buscar archivos
-- `<leader>fg` - Búsqueda global
+- `<leader>fg` - Búsqueda en contenido
+- `<leader>gd` - Ir a definición
+- `<leader>gr` - Ir a referencias
+- `-` - Abrir Oil (navegador de archivos)
+
+**Debugging:**
+
+- `<F5>` - Continuar debugging
+- `<F9>` - Toggle breakpoint
+- `<F10>` - Step over
+- `<F11>` - Step into
+- `<leader>du` - Toggle UI debugging
+
+**Git y productividad:**
+
 - `<leader>gg` - LazyGit
 - `<leader>cf` - Formatear código
-- `-` - Oil (navegador de archivos)
-- `<leader>cc` - Claude Code toggle
-- `<leader>cs` - Claude Code enviar selección
+- `<leader>w` - Guardar archivo
+
+**Claude Code:**
+
+- `<leader>cc` - Toggle Claude
+- `<leader>cs` - Enviar selección
 
 ### WezTerm
 
 - `Ctrl+Space h/l` - Cambiar workspace
 - `Ctrl+Space flechas` - Navegar panes
-- `Ctrl+Space -/+` - Dividir vertical/horizontal
+- `Ctrl+Space -/+` - Dividir
 
-### PowerShell
+## Estructura
 
-- `ll` - Listado largo (eza)
-- `la` - Listado completo
-- `..` - Directorio anterior
-- `reload-profile` - Recargar perfil PowerShell
+```
+HatDotsWindows/
+├── nvim/                    # Configuración Neovim
+│   ├── lua/config/         # Configuraciones base
+│   └── lua/plugins/        # Plugins
+├── wezterm/                # Configuración WezTerm
+├── Microsoft.PowerShell_profile.ps1  # Perfil PowerShell
+├── starship.toml          # Starship prompt
+├── install.ps1            # Script de instalación
+└── README.md               # Este archivo
+```
 
 ## Problemas Comunes
 
-### Symlinks
+- **Symlinks**: Habilita Modo Desarrollador o ejecuta install.ps1 como Administrador
+- **Telescope lento**: Asegúrate de tener `fd` y `ripgrep` instalados
+- **Build errors**: Requiere Zig y LLVM para algunos plugins
 
-- **Windows 10/11**: Habilita "Modo Desarrollador" para crear symlinks sin admin
-- **Alternativa**: Ejecutar el script como Administrador
-
-### Plugins de Neovim
-
-- **Build errors**: Asegúrate de tener Zig y LLVM instalados
-- **Mason**: Reinicia Neovim si Mason no encuentra herramientas
-
-### API Keys
-
-- **Claude Code**: Necesita `ANTHROPIC_API_KEY`
-- **Gemini**: Necesita `GEMINI_API_KEY`
-- Las keys se configuran en variables de entorno de usuario
-
-## Contribuciones
-
-Las mejoras son bienvenidas:
-
-- Reporta issues en GitHub
-- Envía pull requests
-- Sugiere nuevas configuraciones
-
-## Licencia
-
-MIT License - Siéntete libre de usar, modificar y distribuir.
-
-## Créditos
-
-Basado en LazyVim y configuraciones optimizadas para desarrollo en Windows.
+MIT License
 
