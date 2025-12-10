@@ -1,7 +1,7 @@
 return {
 	"epwalsh/obsidian.nvim",
 	version = "*",
-	lazy = false, -- cargado siempre para evitar timings raros
+	ft = "markdown", -- Load only for markdown files
 
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -13,14 +13,14 @@ return {
 			{ name = "HatNotes", path = "~/HatNotes" },
 		},
 
-		-- Compleción
+		-- Completion
 		completion = {
-			nvim_cmp = false, -- si usás blink.cmp, poné blink = true en vez de nvim_cmp
+			nvim_cmp = false, -- if you use blink.cmp, put blink = true instead of nvim_cmp
 			min_chars = 2,
 			create_new = true,
 		},
 
-		-- Templates & Dailies (tu estructura 0–7)
+		-- Templates & Dailies (your 0-7 structure)
 		templates = {
 			folder = "7-Tmpl",
 			date_format = "%Y-%m-%d-%a",
@@ -35,7 +35,7 @@ return {
 		preferred_link_style = "wiki",
 		picker = { name = "telescope.nvim" },
 
-		-- Abrir URLs/imagenes en Windows
+		-- Open URLs/images on Windows
 		follow_url_func = function(url)
 			vim.fn.jobstart({ "cmd.exe", "/c", "start", "", url }, { detach = true })
 		end,
@@ -47,16 +47,16 @@ return {
 		sort_reversed = true,
 		open_notes_in = "current",
 
-		-- Dejo vacío para que los mappings los pongamos nosotros vía autocmd (más robusto)
+		-- Leave empty to place mappings ourselves via autocmd (more robust)
 		mappings = {},
 	},
 
 	config = function(_, opts)
-		-- Fallback si sacaste telescope por accidente
+		-- Fallback if you accidentally removed telescope
 		if opts.picker and opts.picker.name == "telescope.nvim" then
 			local ok = pcall(require, "telescope")
 			if not ok then
-				vim.notify("[obsidian] telescope no encontrado; usando mini.pick", vim.log.levels.WARN)
+				vim.notify("[obsidian] telescope not found; using mini.pick", vim.log.levels.WARN)
 				opts.picker.name = "mini.pick"
 			end
 		end
@@ -65,7 +65,7 @@ return {
 
 		vim.opt.conceallevel = 1
 
-		-- ---- Mapeos buffer-locales SIEMPRE que el buffer sea markdown ----
+		-- ---- Buffer-local mappings ALWAYS when buffer is markdown ----
 		local function attach_obsidian_buf(bufnr)
 			if not bufnr or not vim.api.nvim_buf_is_loaded(bufnr) then
 				return
@@ -85,7 +85,7 @@ return {
 				return util.gf_passthrough()
 			end, { buffer = bufnr, expr = true, noremap = false, silent = true, desc = "Obsidian follow (gf)" })
 
-			-- Toggle checkbox (comando del plugin: es lo más robusto y no depende de UI extra)
+			-- Toggle checkbox (plugin command: most robust and doesn't depend on extra UI)
 			vim.keymap.set(
 				"n",
 				"<leader>ch",
@@ -114,31 +114,31 @@ return {
 			end,
 		})
 
-		-- Attach inmediato por si ya estás en una nota
+		-- Immediate attach in case you're already in a note
 		vim.schedule(function()
 			attach_obsidian_buf(vim.api.nvim_get_current_buf())
 		end)
 	end,
 
-	-- Atajos útiles
+	-- Useful shortcuts
 	keys = {
-		-- Comandos del plugin
-		{ "<leader>oo", "<cmd>ObsidianOpen<cr>", desc = "Abrir en Obsidian app" },
-		{ "<leader>on", "<cmd>ObsidianNew<cr>", desc = "Nueva nota" },
+		-- Plugin commands
+		{ "<leader>oo", "<cmd>ObsidianOpen<cr>", desc = "Open in Obsidian app" },
+		{ "<leader>on", "<cmd>ObsidianNew<cr>", desc = "New note" },
 		{ "<leader>oq", "<cmd>ObsidianQuickSwitch<cr>", desc = "Quick switch" },
-		{ "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Buscar" },
-		{ "<leader>ot", "<cmd>ObsidianTemplate<cr>", desc = "Insertar template" },
-		{ "<leader>od", "<cmd>ObsidianToday<cr>", desc = "Daily (hoy)" },
-		{ "<leader>oD", "<cmd>ObsidianTomorrow<cr>", desc = "Daily (mañana)" },
+		{ "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Search" },
+		{ "<leader>ot", "<cmd>ObsidianTemplate<cr>", desc = "Insert template" },
+		{ "<leader>od", "<cmd>ObsidianToday<cr>", desc = "Daily (today)" },
+		{ "<leader>oD", "<cmd>ObsidianTomorrow<cr>", desc = "Daily (tomorrow)" },
 		{ "<leader>ob", "<cmd>ObsidianBacklinks<cr>", desc = "Backlinks" },
-		{ "<leader>ol", "<cmd>ObsidianLinks<cr>", desc = "Links del buffer" },
+		{ "<leader>ol", "<cmd>ObsidianLinks<cr>", desc = "Buffer links" },
 
 		{
 			"<leader>oO",
 			function()
 				vim.fn.jobstart({ "cmd.exe", "/c", "start", "", "obsidian://open" }, { detach = true })
 			end,
-			desc = "Forzar abrir Obsidian (obsidian://)",
+			desc = "Force open Obsidian (obsidian://)",
 		},
 	},
 }

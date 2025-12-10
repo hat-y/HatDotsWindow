@@ -25,21 +25,21 @@ local function attach(buf)
 		return util.gf_passthrough()
 	end, { expr = true, noremap = false, desc = "Obsidian follow (gf)" })
 
-	-- Enter inteligente (seguir link / toggle checkbox / etc.)
+	-- Smart Enter (follow link / toggle checkbox / etc.)
 	map("n", "<CR>", function()
 		return util.smart_action()
 	end, { expr = true, desc = "Obsidian smart action" })
 
-	-- Toggle checkbox (usamos el comando del plugin: robusto)
+	-- Toggle checkbox (we use plugin command: robust)
 	map("n", "<leader>ch", "<cmd>ObsidianToggleCheckbox<CR>", { desc = "Obsidian: toggle checkbox" })
 
-	map("n", "<leader>oo", "<cmd>ObsidianOpen<CR>", { desc = "Obsidian: abrir app" })
-	map("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Obsidian: nueva nota" })
+	map("n", "<leader>oo", "<cmd>ObsidianOpen<CR>", { desc = "Obsidian: open app" })
+	map("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Obsidian: new note" })
 	map("n", "<leader>oq", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Obsidian: quick switch" })
-	map("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Obsidian: buscar" })
-	map("n", "<leader>ot", "<cmd>ObsidianTemplate<CR>", { desc = "Obsidian: insertar template" })
-	map("n", "<leader>od", "<cmd>ObsidianToday<CR>", { desc = "Obsidian: daily (hoy)" })
-	map("n", "<leader>oD", "<cmd>ObsidianTomorrow<CR>", { desc = "Obsidian: daily (mañana)" })
+	map("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Obsidian: search" })
+	map("n", "<leader>ot", "<cmd>ObsidianTemplate<CR>", { desc = "Obsidian: insert template" })
+	map("n", "<leader>od", "<cmd>ObsidianToday<CR>", { desc = "Obsidian: daily (today)" })
+	map("n", "<leader>oD", "<cmd>ObsidianTomorrow<CR>", { desc = "Obsidian: daily (tomorrow)" })
 end
 
 function M.setup_autocmd()
@@ -51,7 +51,7 @@ function M.setup_autocmd()
 			attach(ev.buf)
 		end,
 	})
-	-- attach inmediato por si ya estás en un .md al cargar Neovim
+	-- immediate attach in case you're already in a .md when loading Neovim
 	vim.schedule(function()
 		attach(vim.api.nvim_get_current_buf())
 	end)
