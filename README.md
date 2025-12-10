@@ -1,128 +1,241 @@
 # HatDots Windows
 
-Configuraciones de desarrollo para Windows con Neovim, WezTerm, PowerShell y debugging integrado.
+<!-- TODO: Add screenshot Neovim setup -->
 
-## Instalacion
+**Una configuración moderna de Neovim para Windows** que combina LazyVim con ajustes personales para máxima productividad en desarrollo Windows.
+
+## ¿Qué hace especial a esta configuración?
+
+- **Optimizada para Windows**: Clipboard, shell y paths configurados nativamente
+- **Diseño limpio**: Tema Kanagawa con transparencias y colores consistentes
+- **Zero-config debugging**: Soporte Python, Node.js, Rust listo para usar
+- **Claude Code integrado**: IA directamente en tu editor
+- **Obsidian**: Notas y conocimiento interconectado
+- **Rendimiento**: Lazy loading y configuraciones eficientes
+
+## Instalación
 
 ```powershell
-# Clonar el repositorio
+# 1. Clonar el repositorio
 git clone https://github.com/hat-y/HatDotsWindows.git $HOME\HatDotsWindows
 
-# Ejecutar script de instalacion
+# 2. Ejecutar instalación automática
 cd $HOME\HatDotsWindows
 .\install.ps1
+
+# 3. Reiniciar PowerShell/WezTerm y ¡listo!
 ```
 
-## Requisitos
+> **Nota**: El script maneja todo: crea symlinks, instala dependencias y configura el entorno. Solo requiere permisos de administrador para los symlinks.
 
-### Herramientas Esenciales
+## Requisitos Previos
+
+### Herramientas
 
 ```powershell
-winget install -e --id Git.Git
-winget install -e --id Neovim.Neovim
-winget install -e --id WezTerm.WezTerm
-winget install -e --id Starship.Starship
-winget install -e --id BurntSushi.ripgrep.MSVC
-winget install -e --id sharkdp.fd
+# Git y herramientas base
+winget install -e --id Git.Git              # Control de versiones
+winget install -e --id Neovim.Neovim        # El editor
+winget install -e --id WezTerm.WezTerm      # Terminal moderna
+winget install -e --id Starship.Starship    # Prompt personalizado
+
+# Búsqueda y navegación
+winget install -e --id BurntSushi.ripgrep.MSVC    # Búsqueda en archivos
+winget install -e --id sharkdp.fd                 # Búsqueda de archivos
 ```
 
-### Para Desarrollo
+### Para Desarrollo Full-Stack
 
 ```powershell
-winget install -e --id JesseDuffield.lazygit
-winget install -e --id Zig.Zig
-winget install -e --id LLVM.LLVM
-winget install -e --id eza-community.eza
+# Herramientas de desarrollo
+winget install -e --id JesseDuffield.lazygit    # Git UI/CLI
+winget install -e --id Zig.Zig                  # Compilador (algunos plugins lo necesitan)
+winget install -e --id LLVM.LLVM                # Toolchain C++
+winget install -e --id eza-community.eza        # ls mejorado
 ```
 
-## Configuracion Post-Instalacion
+### Para Python Development
+
+```powershell
+# Python y debugging
+python -m pip install --upgrade pip
+python -m pip install debugpy                    # Para nvim-dap
+```
+
+## Configuración Post-Instalación
 
 ### Neovim
 
-1. **Primer arranque**: Abre Neovim y espera instalación automática de plugins
-2. **Instalar herramientas**: `:Lazy sync`
-3. **Instalar LSP**: `:Mason` y selecciona servidores para tus lenguajes
-4. **Para debugging Python**: `python -m pip install debugpy`
+```vim
+" 1. Abrir Neovim
+nvim
+
+" 2. Esperar instalación automática de plugins
+" 3. Verificar instalación
+:Lazy check      # Revisa estado de plugins
+:Mason           # Instala/actualiza LSPs
+:checkhealth     # Verifica que todo esté bien
+```
 
 ### API Keys (Opcional)
 
 ```powershell
-# Claude Code
-[System.Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "tu-key", "User")
+# Claude Code para asistencia IA
+[Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "tu-clave-api", "User")
 ```
 
-## Caracteristicas
+> **¿Dónde obtener las keys?**: Claude AI → https://console.anthropic.com/
 
-### Neovim
+## Características
 
-- **LazyVim** como base con extras para TypeScript, Python, Rust
-- **Debugging integrado** con nvim-dap (soporte para Python, JavaScript/TypeScript)
-- **Claude Code** integrado con `<leader>c`
-- **Telescope optimizado** con fd y ripgrep
-- **Oil** como navegador de archivos
+### Neovim Config
 
-### WezTerm
+**Base LazyVim + Extras:**
 
-- Multiplexor con workspaces virtuales
-- Launch menu con PowerShell y opciones de admin
-- Integración con PowerShell
+- **TypeScript**: Completión, refactoring, debugging
+- **Python**: LSP, formatting, testing, debugging
+- **Rust**: Racer, rust-analyzer, debugging
 
-## Atajos
+**Plugins Personalizados:**
 
-### Neovim
+- **Claude Code**: `leader>a` para abrir IA en el editor
+- **Oil.nvim**: Navegación de archivos tipo VSCode
+- **Telescope**: Búsqueda con fzf, live grep args
+- **Kanagawa**: Tema Dragon con transparencias
+- **Obsidian**: Zettelkasten y notas interconectadas
+- **Debugging**: Python, Node.js, Rust con nvim-dap
 
-**Búsqueda y navegación:**
+### UI/UX
 
-- `<leader>ff` - Buscar archivos
-- `<leader>fg` - Búsqueda en contenido
-- `<leader>gd` - Ir a definición
-- `<leader>gr` - Ir a referencias
-- `-` - Abrir Oil (navegador de archivos)
+- **Temas consistentes**: Kanagawa + WezTerm coordinados
+- **Transparencias**: Se ve el fondo de tu terminal
+- **Icons**: nvim-web-devicons en everywhere
+- **Statusline**: LazyVim + indicadores personalizados
 
-**Debugging:**
+### Optimizaciones Windows
 
-- `<F5>` - Continuar debugging
-- `<F9>` - Toggle breakpoint
-- `<F10>` - Step over
-- `<F11>` - Step into
-- `<leader>du` - Toggle UI debugging
+- **Clipboard**: win32yank + PowerShell fallback
+- **Shell**: PowerShell 7 configurado correctamente
+- **Paths**: Manejo de rutas Windows nativo
+- **Performance**: Lazy loading y shada optimizado
 
-**Git y productividad:**
+## Atajos Importantes
 
-- `<leader>gg` - LazyGit
-- `<leader>cf` - Formatear código
-- `<leader>w` - Guardar archivo
+### Navegación y Archivos
 
-**Claude Code:**
+```
+-                # Abrir Oil (navegador de archivos)
+<C-w>h/j/k/l      # Navegar ventanas (estándar Vim)
+<leader>ff       # Buscar archivos (Telescope)
+<leader>fg       # Buscar en contenido
+<leader>fb       # Buffer switcher
+```
 
-- `<leader>cc` - Toggle Claude
-- `<leader>cs` - Enviar selección
+### Desarrollo
 
-### WezTerm
+```
+<leader>lf       # Formatear código
+<leader>la       # Code actions (fix imports, etc)
+<leader>lr       # Renombrar variable
+<leader>ld       # Ver diagnósticos/error
+```
 
-- `Ctrl+Space h/l` - Cambiar workspace
-- `Ctrl+Space flechas` - Navegar panes
-- `Ctrl+Space -/+` - Dividir
+### Debugging (F-keys como VSCode)
 
-## Estructura
+```
+<F5>             # Continuar debugging
+<F9>             # Toggle breakpoint
+<F10>            # Step over
+<F11>            # Step into
+<leader>du       # Toggle debugging UI
+```
+
+### Claude Code IA
+
+```
+<leader>ac       # Abrir Claude en panel
+<leader>ar       # Reanudar conversación
+<leader>aa       # Continuar última petición
+<leader>as       # Enviar selección a Claude
+```
+
+### Obsidian (Notas)
+
+```
+<leader>on       # Nueva nota
+<leader>os       # Buscar notas
+<leader>ot       # Insertar template
+<leader>od       # Nota diaria
+<CR>             # Smart action (seguir link, toggle checkbox)
+```
+
+## Estructura de Archivos
 
 ```
 HatDotsWindows/
 ├── nvim/                    # Configuración Neovim
-│   ├── lua/config/         # Configuraciones base
-│   └── lua/plugins/        # Plugins
-├── wezterm/                # Configuración WezTerm
-├── Microsoft.PowerShell_profile.ps1  # Perfil PowerShell
-├── starship.toml          # Starship prompt
-├── install.ps1            # Script de instalación
+│   ├── lua/config/            # Configuraciones base
+│   │   ├── options.lua        # Opciones Neovim
+│   │   ├── keymaps.lua        # Atajos personalizados
+│   │   ├── utils.lua          # Utilidades varias
+│   │   ├── dap.lua            # Debugging configuration
+│   │   └── obsidian_maps.lua  # Obsidian keymaps
+│   └── lua/plugins/           # Plugins Lazy
+│       ├── lsp.lua            # LSP servers
+│       ├── format.lua         # Formatters
+│       ├── oil.lua            # File explorer
+│       ├── telescope.lua      # Búsqueda
+│       ├── obsidian.lua       # Notas
+│       ├── claude.lua         # AI assistant
+│       └── colorscheme.lua    # Tema Kanagawa
+├── wezterm/                 # Configuración WezTerm
+├── Microsoft.PowerShell_profile.ps1  # PowerShell profile
+├── starship.toml           # Starship prompt config
+├── install.ps1             # Installation script
 └── README.md               # Este archivo
 ```
 
-## Problemas Comunes
+## Troubleshooting
 
-- **Symlinks**: Habilita Modo Desarrollador o ejecuta install.ps1 como Administrador
-- **Telescope lento**: Asegúrate de tener `fd` y `ripgrep` instalados
-- **Build errors**: Requiere Zig y LLVM para algunos plugins
+### Symlinks no funcionan
 
-MIT License
+```powershell
+# Habilitar Developer Mode o ejecutar como Admin
+# O ejecutar:
+.\install.ps1 -Force
+```
+
+### Telescope está lento
+
+```powershell
+# Instalar estas herramientas
+winget install fd ripgrep  # Ya incluido en requisitos
+```
+
+### Build errors en plugins
+
+```powershell
+# Algunos plugins necesitan Zig/LLVM
+winget install Zig.Zig LLVM.LLVM
+```
+
+### Claude Code no funciona
+
+```powershell
+# Verificar API key
+echo $env:ANTHROPIC_API_KEY
+
+# O configurar manualmente
+[Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "tu-key", "User")
+```
+
+### LSP no se activa
+
+```vim
+:Mason
+# Instala los LSPs que necesites:
+- vtsls (TypeScript)
+- pyright (Python)
+- rust-analyzer (Rust)
+```
 
