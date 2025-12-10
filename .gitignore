@@ -2,25 +2,77 @@
 Thumbs.db
 desktop.ini
 $RECYCLE.BIN/
+*.lnk
 
 # Neovim
 *.swp
 *.swo
 *~
+.nvim/
+*.nvimrc
 
 # PowerShell
 *.ps1_
+*.psm1_
+*.psd1_
+
+# Environment and secrets
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+*.key
+*.pem
+*.p12
 
 # Logs
 *.log
+logs/
 
 # IDE
 .vscode/
+.idea/
+.claude/
+*.sublime-*
 
 # Temporary files
 *.tmp
 *.temp
+*.bak
+*.backup
 
 # Cache directories
 .nvim-data/
 .cache/
+.parcel-cache/
+.node_modules/
+.mypy_cache/
+.pytest_cache/
+.coverage
+.DS_Store
+
+# Package managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+poetry.lock
+Pipfile.lock
+
+# Build outputs
+dist/
+build/
+out/
+target/
+bin/
+obj/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# API keys and config (if any)
+api-keys.txt
+secrets.txt
+config.local.*
