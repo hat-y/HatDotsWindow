@@ -2,11 +2,11 @@ return {
 	"stevearc/oil.nvim",
 
 	-- Load Oil when opening a directory or when using the keymap
-	lazy = false,
-
+	event = "VeryLazy",
+	cmd = "Oil",
 	keys = {
-		{ "-", "<CMD>Oil<CR>", desc = "Open Oil (parent dir)" },
-		{ "<leader>E", "<CMD>Oil --float<CR>", desc = "Open Oil (floating)" },
+		{ "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
+		{ "<leader>E", "<cmd>Oil --float<cr>", desc = "Open Oil (floating)" },
 	},
 
 	opts = {

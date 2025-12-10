@@ -1,6 +1,5 @@
 -- lua/plugins/lsp.lua
 return {
-
 	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
@@ -26,8 +25,7 @@ return {
 				pyright = {
 					settings = { python = { analysis = { typeCheckingMode = "basic" } } },
 				},
-				ruff = { -- ← nombre correcto
-					-- evita solapar el hover de Pyright
+				ruff = {
 					on_attach = function(client)
 						client.server_capabilities.hoverProvider = false
 					end,
@@ -45,4 +43,5 @@ return {
 			},
 		},
 	},
+}
 }

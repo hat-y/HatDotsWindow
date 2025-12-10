@@ -28,9 +28,4 @@ return {
 		"marcinjahn/gemini-cli.nvim",
 		enabled = false,
 	},
-	{
-		-- Temporarily disabled due to compilation issues on Windows
-		"yetone/avante.nvim",
-		enabled = false,
-	},
-}
+	}

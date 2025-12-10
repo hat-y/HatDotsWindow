@@ -3,14 +3,14 @@ return {
 
 	{
 		"rebelot/kanagawa.nvim",
-		lazy = false, -- carga inmediata
-		priority = 1000, -- asegúrate de que el tema carga primero
+		lazy = false, -- immediate load
+		priority = 1000, -- ensure theme loads first
 		opts = {
-			compile = false, -- sin compilación a disco (puedes activar luego)
-			transparent = true, -- sin fondo; deja ver el del terminal
-			dimInactive = false, -- no oscurecer ventanas inactivas
+			compile = false, -- no disk compilation (you can enable later)
+			transparent = true, -- no background; lets terminal background show
+			dimInactive = false, -- don't dim inactive windows
 			terminalColors = true,
-			theme = "dragon", -- estilos: "wave", "dragon", "lotus" (light)
+			theme = "dragon", -- styles: "wave", "dragon", "lotus" (light)
 			background = {
 				dark = "dragon",
 				light = "lotus",
@@ -41,13 +41,13 @@ return {
 					Pmenu = { bg = "none" },
 					PmenuSel = { bg = palette.waveBlue1 },
 
-					-- CursorLine: puedes dejar “none” si lo quieres ultra plano
+					-- CursorLine: you can set to "none" if you want it ultra flat
 					CursorLine = { bg = "none" },
 
-					-- Visual (selección)
+					-- Visual (selection)
 					Visual = { bg = palette.waveBlue1 },
 
-					-- Telescope (si quieres mantenerlo transparente)
+					-- Telescope (if you want to keep it transparent)
 					TelescopeNormal = { bg = "none" },
 					TelescopeBorder = { bg = "none", fg = theme.ui.float.fg_border },
 				}
