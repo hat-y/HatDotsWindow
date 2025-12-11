@@ -36,11 +36,15 @@ map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window wi
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- ====================================================================
--- Organized leader key groups
+-- Organized leader key groups (avoiding LazyVim defaults)
 -- ====================================================================
 
--- Buffer operations
-map("n", "<leader>b", "<cmd>bdelete<cr>", { desc = "Close buffer" })
+-- Use Ctrl+s for save (avoid conflict with <leader>w window group)
+map("n", "<C-s>", "<cmd>w<cr>", { desc = "Save file" })
+
+-- Buffer operations (use specific commands, not <leader>b group)
+map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
+map("n", "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", { desc = "Delete other buffers" })
 
 -- File operations
 -- Groups will be defined with which-key at the end of the file
@@ -51,37 +55,26 @@ map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
 map("n", "<leader>sg", "<cmd>Telescope live_grep<cr>", { desc = "Grep in project" })
 map("n", "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Search in buffer" })
 
--- Quick access
-map("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit all" })
-map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
+-- Quit operations (avoid <leader>q group conflict)
+map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
+map("n", "<leader>qw", "<cmd>wqa<cr>", { desc = "Save and quit all" })
 
 -- ====================================================================
--- Claude Code - Move to <leader>a (AI)
+-- Claude Code - Remove duplicate mappings (already defined in plugins/claude.lua)
 -- ====================================================================
 
-map("n", "<leader>ac", "<cmd>ClaudeCode<cr>", { desc = "Toggle Claude" })
-map("n", "<leader>ar", "<cmd>ClaudeCode --resume<cr>", { desc = "Resume Claude" })
-map("n", "<leader>aa", "<cmd>ClaudeCode --continue<cr>", { desc = "Continue Claude" })
-map("n", "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", { desc = "Select Claude model" })
-map("n", "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", { desc = "Add current buffer" })
-map("v", "<leader>as", "<cmd>ClaudeCodeSend<cr>", { desc = "Send to Claude" })
-map("n", "<leader>at", "<cmd>ClaudeCodeContinue<cr>", { desc = "Continue recent conversation" })
-map("n", "<leader>av", "<cmd>ClaudeCodeVerbose<cr>", { desc = "Verbose logging" })
-map("n", "<leader>af", "<cmd>ClaudeCodeFocus<cr>", { desc = "Focus Claude" })
-
--- Diff management
-map("n", "<leader>da", "<cmd>ClaudeCodeDiffAccept<cr>", { desc = "Accept diff" })
-map("n", "<leader>dd", "<cmd>ClaudeCodeDiffDeny<cr>", { desc = "Deny diff" })
+-- NOTE: Claude mappings are already defined in plugins/claude.lua with <leader>C prefix
+-- Keeping only additional ones not defined there
 
 -- ====================================================================
--- LSP - Use <leader>l instead of <Space>c for code
+-- LSP - Use <leader>L instead of <leader>l to avoid Lazy plugin conflict
 -- ====================================================================
 
-map("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format()<cr>", { desc = "Format buffer" })
-map("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code actions" })
-map("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename symbol" })
-map("n", "<leader>ld", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Show diagnostics" })
-map("n", "<leader>lh", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover documentation" })
+map("n", "<leader>Lf", "<cmd>lua vim.lsp.buf.format()<cr>", { desc = "Format buffer" })
+map("n", "<leader>La", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code actions" })
+map("n", "<leader>Lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename symbol" })
+map("n", "<leader>Ld", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Show diagnostics" })
+map("n", "<leader>Lh", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover documentation" })
 
 -- ====================================================================
 -- Terminal
