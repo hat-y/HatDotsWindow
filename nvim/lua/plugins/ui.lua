@@ -1,4 +1,4 @@
--- Modo compacto para lualine
+-- Mode compact for lualine
 local mode = {
 	"mode",
 	fmt = function(s)
@@ -27,6 +27,12 @@ local mode = {
 
 return {
 	{ "folke/todo-comments.nvim", version = "*" },
+
+	{
+		"folke/ts-comments.nvim",
+		event = "VeryLazy",
+		opts = {},
+	},
 
 	{
 		"folke/which-key.nvim",
@@ -64,7 +70,11 @@ return {
 								if not ok then
 									return ""
 								end
-								local path = vim.fn.fnamemodify(oil.get_current_dir(), ":~")
+								local dir = oil.get_current_dir()
+								if not dir then
+									return ""
+								end
+								local path = vim.fn.fnamemodify(dir, ":~")
 								return path .. " %m"
 							end,
 						},
