@@ -2,7 +2,7 @@ return {
 	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
-			ensure_installed = { "vtsls", "pyright", "ruff", "lua_ls" },
+			ensure_installed = { "vtsls", "pyright", "ruff", "lua_ls", "cssls", "html", "emmet_ls" },
 			automatic_installation = true,
 		},
 	},
@@ -36,6 +36,59 @@ return {
 							diagnostics = { globals = { "vim" } },
 							workspace = { checkThirdParty = false },
 							telemetry = { enable = false },
+						},
+					},
+				},
+				cssls = {
+					settings = {
+						css = {
+							validate = true,
+							lint = {
+								unknownProperties = "warning",
+								important = "warning",
+								duplicateProperties = "warning",
+							},
+						},
+						scss = {
+							validate = true,
+							lint = {
+								unknownProperties = "warning",
+							},
+						},
+						less = {
+							validate = true,
+							lint = {
+								unknownProperties = "warning",
+							},
+						},
+					},
+				},
+				html = {
+					settings = {
+						html = {
+							hover = {
+								documentation = true,
+								references = true,
+							},
+							validate = {
+								enabled = true,
+								styles = true,
+								scripts = true,
+							},
+							format = {
+								enabled = true,
+								wrapLineLength = 120,
+								wrapAttributes = "auto",
+							},
+						},
+					},
+				},
+				emmet_ls = {
+					settings = {
+						emmet = {
+							showSuggestionsAsSnippets = true,
+							expandAbbreviation = true,
+							showExpandedAbbreviation = "always",
 						},
 					},
 				},
