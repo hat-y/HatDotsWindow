@@ -1,0 +1,13 @@
+﻿wezterm : error: unrecognized subcommand 'show-fonts'
+At line:1 char:1
++ wezterm show-fonts 2>&1 | Out-File -FilePath 'font_test.txt' -Encodin ...
++ ~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (error: unrecogn...nd 'show-fonts':String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+  tip: some similar subcommands exist: 'show-keys', 'ls-fonts'
+
+Usage: wezterm.exe [OPTIONS] [COMMAND]
+
+For more information, try '--help'.

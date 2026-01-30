@@ -13,7 +13,7 @@ return {
 				json = { "prettierd", "prettier" },
 				css = { "prettierd", "prettier" },
 				markdown = { "prettierd", "prettier" },
-				python = { "ruff_format" }, -- dejaste solo ruff ✔
+				python = { "ruff_format" }, -- only ruff
 				sh = { "shfmt" },
 			})
 

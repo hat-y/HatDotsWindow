@@ -34,8 +34,8 @@ return {
 	{
 		"kdheepak/lazygit.nvim",
 		keys = {
-			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }, -- repo actual
-			{ "<leader>gG", "<cmd>LazyGitCurrentFile<cr>", desc = "LazyGit (file)" }, -- enfocado en el archivo
+			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }, -- current repo
+			{ "<leader>gG", "<cmd>LazyGitCurrentFile<cr>", desc = "LazyGit (file)" }, -- focused on file
 		},
 	},
 }

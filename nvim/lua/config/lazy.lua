@@ -24,6 +24,9 @@ require("lazy").setup({
 		-- local plugins:
 		{ import = "plugins" },
 		{ "LazyVim/LazyVim", opts = { colorscheme = "kanagawa" } },
+
+		-- Markdown enhancements
+		{ import = "plugins.markdown-enhancements" },
 	},
 	defaults = { lazy = false, version = false },
 	checker = { enabled = false },

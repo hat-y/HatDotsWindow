@@ -49,9 +49,11 @@ winget install -e --id sharkdp.fd                 # Búsqueda de archivos
 ```powershell
 # Herramientas de desarrollo
 winget install -e --id JesseDuffield.lazygit    # Git UI/CLI
+winget install -e --id BrechtSanders.WinLibs.POSIX.UCRT  # Runtime POSIX para herramientas de línea de comandos
 winget install -e --id Zig.Zig                  # Compilador (algunos plugins lo necesitan)
 winget install -e --id LLVM.LLVM                # Toolchain C++
 winget install -e --id eza-community.eza        # ls mejorado
+winget install -e --id Microsoft.tree-sitter-cli  # Tree-sitter CLI para análisis de sintaxis
 ```
 
 ### Para Python Development
@@ -72,9 +74,27 @@ nvim
 
 " 2. Esperar instalación automática de plugins
 " 3. Verificar instalación
-:Lazy check      # Revisa estado de plugins
+:Laz
+
+y check      # Revisa estado de plugins
 :Mason           # Instala/actualiza LSPs
 :checkhealth     # Verifica que todo esté bien
+```
+
+### PowerShell Profile
+
+El script `install.ps1` crea un symlink al `Microsoft.PowerShell_profile.ps1` en tu directorio `Documents\PowerShell`.
+
+El profile configura:
+- **PSReadLine**: Historial, autocompletado, navegación por flechas
+- **Starship**: Prompt personalizado
+- **Zoxide**: `cd` inteligente con auto-sugerencias
+- **Aliases**: `vim=nvim`, `g=git`, `nv=nvim`
+- **Listados mejorados**: `ll`, `la` con eza si está disponible
+
+Para recargar el profile:
+```powershell
+.\$PROFILE
 ```
 
 ### API Keys (Opcional)
@@ -87,6 +107,20 @@ nvim
 > **¿Dónde obtener las keys?**: Claude AI → https://console.anthropic.com/
 
 ## Características
+
+### PowerShell Profile
+
+El script `install.ps1` configura el perfil automáticamente:
+- **PSReadLine**: Historial, autocompletado y navegación
+- **Starship**: Prompt personalizado
+- **Zoxide**: `cd` inteligente con auto-sugerencias
+- **Aliases**: `vim=nvim`, `g=git`, `nv=nvim`
+- **Listados mejorados**: `ll`, `la` con eza si está disponible
+
+Para recargar el perfil:
+```powershell
+.\$PROFILE
+```
 
 ### Neovim Config
 
